@@ -18,4 +18,12 @@ class ProjectController extends Controller
 
         return response()->json(['message' => 'Project created successfully', 'project' => $project], 201);
 }
+
+    public function list_projects(Request $request){
+        $projects = Project::all();
+        return response()->json($projects);
+    }
+
+
+
 }
