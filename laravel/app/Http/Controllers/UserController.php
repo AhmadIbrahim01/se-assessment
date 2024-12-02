@@ -31,5 +31,19 @@ class UserController extends Controller
         return response()->json($user);
 }
 
+    public function edit_user(Request $request, $id){
+        $user = User::find($id);
+        if (!$user) {
+            return response()->json(['message' => 'User not found'], 404);
+        }
 
+        $user->update([
+            'name' => $request->$name,
+            'username' => $request->$username,
+            'password' => $request->$password,
+        ]);
+
+        return response()->json(['message' => 'User edited successfully', 'user' => $user]);
+    }
+    
 }
