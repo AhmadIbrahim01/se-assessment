@@ -13,8 +13,12 @@ class UserProjectsMiddleware
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next): Response
-    {
+    public function handle($request, Closure $next){
+        if (auth()->check()) {
+            $user = auth()->user();
+            $user->increment('requests_num');
+        }
+    
         return $next($request);
     }
 }
