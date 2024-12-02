@@ -24,6 +24,12 @@ class ProjectController extends Controller
         return response()->json($projects);
     }
 
-
+    public function preview_project(Request $request, $id){
+        $project = Project::find($id);
+        if (!$project) {
+            return response()->json(['message' => 'project not found'], 404);
+        }
+        return response()->json($project);
+}
 
 }
